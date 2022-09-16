@@ -5,6 +5,7 @@ import 'package:webfeed/domain/atom_source.dart';
 import 'package:webfeed/domain/media/media.dart';
 import 'package:webfeed/util/helpers.dart';
 import 'package:xml/xml.dart';
+import 'dart:convert';
 
 class AtomItem {
   final String id;
@@ -37,6 +38,33 @@ class AtomItem {
     this.rights,
     this.media,
   });
+
+  String getAuthorsJson(){
+    List<String> authorsStrings = [];
+    authors.forEach((author) {
+      authorsStrings.add(jsonEncode(author.toJson()));
+    });
+    //print("authorjson: "+jsonEncode(authorsStrings));
+    return jsonEncode(authorsStrings);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'updated': updated,
+      'authors': getAuthorsJson(),
+      'links': "",
+      'categories' : "",
+      'contributors': "",
+      'source': "",
+      'published': published,
+      'content': content,
+      'summary': summary,
+      'rights': rights,
+      'media':""
+    };
+  }
 
   factory AtomItem.parse(XmlElement element) {
     return AtomItem(
