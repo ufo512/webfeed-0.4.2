@@ -29,4 +29,10 @@ class AtomLink {
     }
     return AtomLink(href, rel, type, hreflang, title, length);
   }
+  
+  Map<String, dynamic> toJson() => {
+    'href': href,
+    'rel': rel,
+    'type': type,
+  };
 }
