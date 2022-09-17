@@ -14,4 +14,10 @@ class AtomPerson {
     var email = findElementOrNull(element, "email")?.text;
     return AtomPerson(name, uri, email);
   }
+  
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'uri': uri,
+    'email': email,
+  };
 }
